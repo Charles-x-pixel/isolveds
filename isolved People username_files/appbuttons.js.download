@@ -1,0 +1,30 @@
+/* Used by login page to try and determine if the links to the app stores should be shown */
+
+function showAppleStore() {
+    const regex = /iPhone|iPad|iPod/i;
+    var isAppleDevice = regex.test(navigator.userAgent);
+    if (isAppleDevice && !isAppleStoreApp()) {
+        return true;
+    }
+    return false;
+}
+
+function showGooglePlayStore() {
+    return navigator.userAgent.includes('Android');
+}
+
+function isAppleStoreApp() {
+    const cookieName = 'app-platform';
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${cookieName}=`);
+    return parts.length === 2 && parts.pop().split(';').shift() === 'iOS App Store';
+}
+
+$(document).ready(function () {
+    if (showAppleStore()) {
+        document.getElementById("AppAppleStore").classList.remove("hide");
+    }
+    if (showGooglePlayStore()) {
+        document.getElementById("AppGooglePlay").classList.remove("hide");
+    }
+});

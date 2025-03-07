@@ -1,0 +1,77 @@
+﻿
+$(document).ready(function () {
+    setFIDOLoginVisibility();
+    bindFidoLoginHandler();
+    $("#error").hide();
+});
+
+function bindFidoLoginHandler() {
+    $('#fidoLogin').on('keypress', function (e) {
+        if (e.which === 32) {
+            e.preventDefault();
+            $(this).trigger('click');
+        }
+    });
+    $("#fidoLogin").on("click", intiateFidoAuthentication);
+}
+
+
+function setFIDOLoginVisibility() {
+    if (webauthnJSON.supported()) {
+        $("fidoLoginControls").show();
+    } else {
+        $("fidoLoginControls").hide();
+    }
+}
+
+
+function intiateFidoAuthentication() {
+    var fidochallengeJsonDTO = JSON.parse(document.getElementById("fidoAuthenticationChallenge")?.value ?? "{}");
+    var Base64Challenge = fidochallengeJsonDTO?.Base64UrlChallenge ?? "";
+    var Base64KeyIds = fidochallengeJsonDTO?.Base64UrlKeyIds ?? "";
+
+    var ReturnUrl = document.getElementById("Input_ReturnUrl")?.value ?? "/";
+
+
+    const request = {
+        publicKey: {
+            challenge: Base64Challenge,
+            allowCredentials: Base64KeyIds.map(value => ({ id: value, type: 'public-key' })),
+            userVerification: "required",
+        },
+    };
+    webauthnJSON.get(request)
+        .then((result) => {
+
+            $.ajax({
+                url: '?handler=CompleteFidoLogin&returnUrl=' + encodeURIComponent(ReturnUrl),
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(result),
+                headers: {
+                    RequestVerificationToken:
+                        $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function (result) {
+                    if (result?.redirectUrl !== undefined) {
+                        window.location.href = result?.redirectUrl;
+                        return;
+                    }
+
+                    window.location.href = "/Account/PostLogin/Index?returnUrl=" + encodeURIComponent(ReturnUrl);
+                },
+                error: function (error) {
+                    fidoFailed(error)
+                }
+            });
+        })
+        .catch((error) => {
+            fidoFailed(error)
+        });
+}
+
+function fidoFailed(error) {
+    $("#error").text("Passwordless authentication failed. Please try again or use your password");
+    $("#error").show();
+    console.error(error);
+}

